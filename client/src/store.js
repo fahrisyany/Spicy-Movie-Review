@@ -28,6 +28,20 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err);
         });
-    }
+    },
+
+    // searchMovies(context,key){
+    //   axios
+    //   .get(
+    //     `https://api.themoviedb.org/3/search/movie?query=${key}&api_key=00bd566fcd11988eb0fca41abee62e9a&page=1`
+    //   )
+    //   .then(movie => {
+    //     context.commit("setMovies", movie.data.results);
+      
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    // }
   }
 });
