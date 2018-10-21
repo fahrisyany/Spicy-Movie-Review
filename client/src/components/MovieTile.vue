@@ -17,11 +17,9 @@
           <div>
             <h3 class="headline mb-0">{{movie.original_title}}</h3>
             <!-- {{moviesList}} -->
-                <v-icon>star_border</v-icon>
-                <v-icon>star_border</v-icon>
-                <v-icon>star_border</v-icon>
-                <v-icon>star_border</v-icon>
-                <v-icon>star_border</v-icon>
+                 <div class="text-xs-center">
+    <v-rating v-model="rating"></v-rating>
+  </div>
                 <p></p>
             <div>{{movie.overview}}</div>
           </div>
@@ -29,7 +27,7 @@
 
         <v-card-actions>
           <v-btn flat color="orange">
-              <router-link :to='`/movie/${movie.title}`'>More</router-link>
+              <router-link :to='`/movie/${movie.id}`'>More</router-link>
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -54,11 +52,9 @@
           <div>
             <h3 class="headline mb-0">{{movie.original_title}}</h3>
             <!-- {{moviesList}} -->
-                <v-icon>star_border</v-icon>
-                <v-icon>star_border</v-icon>
-                <v-icon>star_border</v-icon>
-                <v-icon>star_border</v-icon>
-                <v-icon>star_border</v-icon>
+                 <div class="text-xs-center">
+    <v-rating v-model="rating"></v-rating>
+  </div>
                 <p></p>
             <div>{{movie.overview}}</div>
           </div>
@@ -66,7 +62,10 @@
 
         <v-card-actions>
           <v-btn flat color="orange">
-              <router-link :to='`/movie/${movie.title}`'>More</router-link>
+
+              <router-link :to='`/movie/${movie.id}`'>
+                More Info
+              </router-link>
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -78,7 +77,7 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   methods: {
-    ...mapActions(["getMovies", "searchMovies"]),
+    ...mapActions(["getMovies", "searchMovies", "getOneMovies"]),
     getImages(img) {
       return `http://image.tmdb.org/t/p/w185/${img}`;
     }
@@ -87,6 +86,8 @@ export default {
     //   this.searchMovies();
   },
   mounted() {
+    this.searchMovies(this.$route.params.key);
+
     this.getMovies();
   },
   computed: {

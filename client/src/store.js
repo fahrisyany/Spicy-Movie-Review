@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     moviesList: "",
     movieDetail: "",
-    movieSearched: ""
+    movieSearched: "",
+    review: ""
   },
   mutations: {
     setMovies(state, payload) {
@@ -19,6 +20,9 @@ export default new Vuex.Store({
     },
     setSearchedMovies(state, payload) {
       state.movieSearched = payload;
+    },
+    setReview(state, payload) {
+      state.review = payload;
     }
   },
   actions: {
@@ -29,7 +33,6 @@ export default new Vuex.Store({
         )
         .then(movie => {
           context.commit("setMovies", movie.data.results);
-
         })
         .catch(err => {
           console.log(err);
@@ -39,10 +42,13 @@ export default new Vuex.Store({
     getOneMovies(context, id) {
       axios
         .get(
-          `https://api.themoviedb.org/3/movie/${id}?api_key=00bd566fcd11988eb0fca41abee62e9a&language=en-US`
+          `https://api.themoviedb.org/3/movie/${id}?api_key=00bd566fcd11988eb0fca41abee62e9a&language=en-US`,
+          { crossDomain: "true" }
         )
         .then(movie => {
-          context.commit("setOneMovies", movie.data.results);
+          // console.log(`==>get one`, movie.data);
+
+          context.commit("setOneMovies", movie.data);
         })
         .catch(err => {
           console.log(err);
@@ -51,30 +57,33 @@ export default new Vuex.Store({
     searchMovies(context, key) {
       axios
         .get(
-          `https://api.themoviedb.org/3/search/movie?query=${key}&api_key=00bd566fcd11988eb0fca41abee62e9a&page=1`
+          `https://api.themoviedb.org/3/search/movie?query=${key}&api_key=00bd566fcd11988eb0fca41abee62e9a&page=1`,
+          {
+            crossDomain: "true"
+          }
         )
         .then(movie => {
-          
           context.commit("setSearchedMovies", movie.data.results);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
 
+    getReviews(context, id) {
+      axios
+        .get(
+          `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=00bd566fcd11988eb0fca41abee62e9a&language=en-US&page=1`,
+          { crossDomain: "true" }
+        )
+        .then(review => {
+          // console.log('===>R',review.data.results);
+
+          context.commit("setReview", review.data.results);
         })
         .catch(err => {
           console.log(err);
         });
     }
-
-    // searchMovies(context,key){
-    //   axios
-    //   .get(
-    //     `https://api.themoviedb.org/3/search/movie?query=${key}&api_key=00bd566fcd11988eb0fca41abee62e9a&page=1`
-    //   )
-    //   .then(movie => {
-    //     context.commit("setMovies", movie.data.results);
-
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-    // }
   }
 });
