@@ -9,7 +9,7 @@ export default new Vuex.Store({
     moviesList: "",
     movieDetail: "",
     review: "",
-
+    trailer: ""
   },
   mutations: {
     setMovies(state, payload) {
@@ -18,11 +18,13 @@ export default new Vuex.Store({
     setOneMovies(state, payload) {
       state.movieDetail = payload;
     },
-    
+
     setReview(state, payload) {
       state.review = payload;
     },
-   
+    setTrailer(state, payload) {
+      state.trailer = payload;
+    }
   },
   actions: {
     getNowPlayingMovies(context) {
@@ -45,7 +47,6 @@ export default new Vuex.Store({
           { crossDomain: "true" }
         )
         .then(movie => {
-
           context.commit("setOneMovies", movie.data);
         })
         .catch(err => {
@@ -119,6 +120,19 @@ export default new Vuex.Store({
         )
         .then(movie => {
           context.commit("setMovies", movie.data.results);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    getTrailer(context, id) {
+      axios
+        .get(
+          `https://api.themoviedb.org/3/movie/${id}/videos?api_key=00bd566fcd11988eb0fca41abee62e9a&language=en-US`,
+          { crossDomain: "true" }
+        )
+        .then(movie => {
+          context.commit("setTrailer", movie.data.results);
         })
         .catch(err => {
           console.log(err);

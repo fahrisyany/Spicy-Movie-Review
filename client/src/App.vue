@@ -2,6 +2,7 @@
   <div id="app">
 
   <v-toolbar>
+    
     <v-toolbar-items class="hidden-sm-and-down">
           <v-btn
           v-for="item in menu"  
@@ -10,7 +11,10 @@
           flat
         >{{ item.title }}</v-btn>
     </v-toolbar-items>
-    
+        <v-spacer></v-spacer>
+
+          <v-toolbar-title>SpicyMovieDB</v-toolbar-title>
+
     <v-spacer></v-spacer>
   
     <v-form
@@ -37,7 +41,7 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      menu: [ 
+      menu: [
         { icon: "home", path: "/", title: "Home" },
         { icon: "Discover", path: "/discover", title: "Discover" }
       ],
@@ -48,9 +52,9 @@ export default {
     ...mapActions(["searchMovies"]),
     search() {
       this.$router.push(`/search/${this.searchKey}`);
-      this.searchMovies(this.searchKey)
+      this.searchMovies(this.searchKey);
     }
-  },
+  }
 };
 </script>
 

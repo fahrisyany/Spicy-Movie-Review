@@ -7,16 +7,15 @@
         v-for="(movie,index) in moviesList" :key='index'  
       >
         <v-img
-          :src="getImages(movie.poster_path)"
+        :src='`http://image.tmdb.org/t/p/w185/${movie.poster_path}`'
           aspect-ratio="0.8"
         ></v-img>
 
         <v-card-title primary-title>
           <div>
-            <h3 class="headline mb-0">{{movie.original_title}}</h3>
-            
+            <h3 class="headline mb-0">{{movie.title}}</h3>
+
                 <v-rating :value=Math.ceil(movie.vote_average/2)
-                readonly = true
                 ></v-rating>
 
                  <div class="text-xs-center">
@@ -56,14 +55,12 @@ export default {
       "getTopRated",
       "getPopular"
     ]),
-    getImages(img) {
-      return `http://image.tmdb.org/t/p/w185/${img}`;
-    }
+    // getImages(img) {
+    //   return `http://image.tmdb.org/t/p/w185/${img}`;
+    // }
   },
   created() {
-    if (this.$route.name === "search") {
-      this.searchMovies(this.$route.params.key);
-    }
+   
     switch (this.$route.path) {
       case "/discover/upcoming":
         console.log("up");
@@ -71,17 +68,22 @@ export default {
         this.getUpcoming();
         break;
       case "/discover/toprated":
+
         console.log("top");
 
         this.getTopRated();
         break;
       case "/discover/popular":
+
         console.log("pop");
 
         this.getPopular();
         break;
       default:
         this.getNowPlayingMovies();
+    }
+     if (this.$route.name === "search") {
+      this.searchMovies(this.$route.params.key);
     }
   },
   mounted() {},

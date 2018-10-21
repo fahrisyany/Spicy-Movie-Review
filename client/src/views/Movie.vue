@@ -16,7 +16,7 @@
         <v-card-title class="pa-2 grey">  
         </v-card-title>
         <v-img
-            :src="getImages(movieDetail.poster_path)"
+            :src='`http://image.tmdb.org/t/p/w185/${movieDetail.poster_path}`'
           gradient="to top, rgba(0,0,0,.44), rgba(0,0,0,.44)"
         >
           <v-container fill-height>
@@ -25,6 +25,9 @@
               <v-layout column justify-end>
                 <div class="headline font-weight-heavy">{{movieDetail.title}}</div>
                 <div class="font-weight-light">{{movieDetail.release_date}}</div>
+
+                <v-rating :value=Math.ceil(movieDetail.vote_average/2)
+                ></v-rating>
               </v-layout>
             </v-layout>
           </v-container>
@@ -61,7 +64,6 @@
               <v-flex>
                 <strong>Availability</strong>
                 <div class="caption mb-2">{{movieDetail.status}}</div>
-            
               </v-flex>
             </v-layout>
           </v-timeline-item>
@@ -102,9 +104,13 @@
 </div>
 
 
-
+<!-- {{trailer[0].key}} -->
+<div class="video-container" v-if="trailer.length">
+<iframe width="1425" height="620" :src='`https://www.youtube.com/embed/${trailer[0].key}`' frameborder="0" allow="autoplay; encrypted-media"></iframe>
         <!-- <h1>review</h1> -->
+</div>
 <v-layout class='review-content' align-center v-if='review.length' >
+    
     <v-flex>
         <h2 id='title-review'>Reviews</h2>
       <v-window
@@ -135,7 +141,7 @@
     </v-flex>
   </v-layout>
 <span v-else>
-          <h3>No review Yet</h3>
+          <h3 id='title-no-review'>No review Yet</h3>
 </span>
 <!-- {{review}} -->
 
@@ -154,10 +160,16 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["getMovies", "searchMovies", "getOneMovies", "getReviews"]),
-    getImages(img) {
-      return `http://image.tmdb.org/t/p/w185/${img}`;
-    }
+    ...mapActions([
+      "getMovies",
+      "searchMovies",
+      "getOneMovies",
+      "getReviews",
+      "getTrailer"
+    ]),
+    // getImages(img) {
+    // //   return `http://image.tmdb.org/t/p/w185/${img}`;
+    // }
   },
 
   mounted() {
@@ -167,10 +179,15 @@ export default {
   created() {
     this.getOneMovies(this.$route.params.id);
     this.getReviews(this.$route.params.id);
+    this.getTrailer(this.$route.params.id);
   },
 
   computed: {
-    ...mapState({ movieDetail: "movieDetail", review: "review" })
+    ...mapState({
+      movieDetail: "movieDetail",
+      review: "review",
+      trailer: "trailer"
+    })
   }
 };
 </script>
@@ -178,7 +195,9 @@ export default {
 .movie-detail {
   /* text-align: left; */
   min-width: 500px;
-    max-width: 500px;
+  max-width: 500px;
+  padding-left: 3em;
+  padding-top: 3em;
 
   /* border: red solid 2px; */
   /* display: inline-block; */
@@ -186,14 +205,41 @@ export default {
 }
 .review-content {
   min-width: 850px;
-    max-width: 850px;
+  max-width: 850px;
 
-    margin-left: 4em;
+  padding-right: 4em;
   /* border: red solid 2px; */
   float: right;
 }
-#title-review{
-    margin:10px;
+#title-review {
+  padding: 1.8em;
+}
+
+#title-no-review {
+  padding: 1.8em;
+  /* border: red solid 2px; */
+  /* width:200px; */
+  padding: 20em;
+  float: right;
+}
+.video-container {
+    /* margin-top: 300px; */
+	position:relative;
+	padding-bottom:36.25%;
+	/* padding-top:10px; */
+	height:0;
+    /* height: 20px; */
+    /* border: red solid 3px; */
+    /* height: 200px;; */
+	overflow:hidden;
+}
+
+.video-container iframe, .video-container object, .video-container embed {
+	position:absolute;
+	top:3em;
+	left:0;
+	width:100%;
+	height:100%;
 }
 </style>
 

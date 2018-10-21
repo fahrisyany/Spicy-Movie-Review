@@ -11,10 +11,11 @@
     >
       <v-img
         :aspect-ratio="16/9"
+        :src='`http://image.tmdb.org/t/p/w185/${moviesList[0].poster_path}`'
+
       ></v-img>
       <v-card-title>
         <div>
-          <span class="headline">Popular</span>
           <!-- <p>{{moviePopular[0].title}}</p> -->
           <div class="d-flex">
          
@@ -24,8 +25,10 @@
           </div>
         </div>
         <v-spacer></v-spacer>
-       <v-btn color="primary" dark @click="popular">Look More
+       <v-btn color="primary" dark @click="popular">Popular
         </v-btn>
+       <v-spacer></v-spacer>
+
       </v-card-title>
     </v-card>
   </v-hover>
@@ -40,10 +43,10 @@
     >
       <v-img
         :aspect-ratio="16/9"
+        :src='`http://image.tmdb.org/t/p/w185/${moviesList[3].poster_path}`'
       ></v-img>
       <v-card-title>
         <div>
-          <span class="headline">Top Rated</span>
           <!-- <p>{{movieTopRated[0].title}}</p> -->
           <div class="d-flex">
         
@@ -53,8 +56,10 @@
           </div>
         </div>
         <v-spacer></v-spacer>
-        <v-btn color="primary" dark @click="toprated">Look More
+        <v-btn color="primary" dark @click="toprated">Top Rated
         </v-btn>
+                <v-spacer></v-spacer>
+
       </v-card-title>
     </v-card>
   </v-hover>
@@ -69,10 +74,11 @@
     >
       <v-img
         :aspect-ratio="16/9"
+        :src='`http://image.tmdb.org/t/p/w185/${moviesList[1].poster_path}`'
+
       ></v-img>
       <v-card-title>
         <div>
-          <span class="headline">Upcoming</span>
           <!-- <p>{{movieUpcoming[0].title}} -->
           <div class="d-flex">
           
@@ -82,8 +88,10 @@
           </div>
         </div>
         <v-spacer></v-spacer>
-       <v-btn color="primary" dark @click="goUpcoming">Look More
+       <v-btn color="primary" dark @click="goUpcoming">Upcoming
         </v-btn>
+                <v-spacer></v-spacer>
+
       </v-card-title>
     </v-card>
 
@@ -112,14 +120,10 @@ export default {
     }
   },
 
-  mounted() {
-    
-  },
+  mounted() {},
   computed: {
     ...mapState({
-      moviePopular: "moviePopular",
-      movieTopRated: "movieTopRated",
-      movieUpcoming: "movieUpcoming"
+      moviesList: "moviesList"
     })
   }
 };
@@ -130,5 +134,6 @@ export default {
   justify-content: center;
   display: flex;
   flex-wrap: wrap;
+  padding:3em;
 }
 </style>

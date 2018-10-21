@@ -18,21 +18,38 @@ export default new Router({
       name: "Discover",
 
       component: () => import("./views/Discover.vue"),
-      children: [
-        {
-          path: "upcoming",
-          component: () => import("./components/MovieTile.vue")
-        },
-        {
-          path: "toprated",
-          component: () => import("./components/MovieTile.vue")
-        },
-        {
-          path: "popular",
-          component: () => import("./components/MovieTile.vue")
-        }
-      ]
+      // children: [
+      //   {
+      //     path: "upcoming",
+      //     // component: () => import("./components/MovieTile.vue")
+      //   },
+      //   {
+      //     path: "toprated",
+      //     // component: () => import("./components/MovieTile.vue")
+      //   },
+      //   {
+      //     path: "popular",
+      //     // component: () => import("./components/MovieTile.vue")
+      //   }
+      // ]
     },
+    {
+      path: "/discover/upcoming",
+      component: () => import("./components/MovieTile.vue")
+    },
+    {
+      path: "/discover/toprated",
+      component: () => import("./components/MovieTile.vue")
+    },
+    {
+      path: "/discover/popular",
+      component: () => import("./components/MovieTile.vue")
+    },
+
+
+
+
+
     {
       path: "/search/:key",
       name: "search",
