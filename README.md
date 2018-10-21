@@ -1,7 +1,7 @@
 # Spicy-MovieDB alpha
 
 
-A Comprehensif fast Movie database fully fledged with review,movie trailer and detailed info about the movie.
+A Comprehensive,fast Movie database website fully fledged with review,movie trailer and detailed info about the movie.
  
 ## Getting Started
 
