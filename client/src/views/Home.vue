@@ -1,18 +1,51 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+
+<br>
+<h1 id='title-latest'>Now Playing</h1>
+   <br>
+
+ <movieTile></movieTile>
+     <router-view></router-view>
+
   </div>
+
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import MovieTile from "../components/MovieTile";
 
 export default {
-  name: 'home',
   components: {
-    HelloWorld
+    MovieTile
+  },
+  data() {
+    return {};
   }
-}
+};
 </script>
+
+<style>
+.movie {
+  margin: 1.2em;
+}
+
+.rightBar {
+  float: right;
+  width: 400px;
+}
+
+.movies {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#title-latest {
+  /* border:solid red 2px; */
+  margin: 0.8em;
+  text-align: center;
+}
+</style>
+
+
