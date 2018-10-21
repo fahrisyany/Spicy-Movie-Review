@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   data() {
     return {
@@ -52,8 +54,10 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["searchMovies"]),
     search() {
       this.$router.push(`/search/${this.searchKey}`);
+      this.searchMovies(this.searchKey)
     }
   },
   mounted() {
