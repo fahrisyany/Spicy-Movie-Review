@@ -8,8 +8,8 @@ export default new Vuex.Store({
   state: {
     moviesList: "",
     movieDetail: "",
-    movieSearched: "",
-    review: ""
+    review: "",
+
   },
   mutations: {
     setMovies(state, payload) {
@@ -18,15 +18,14 @@ export default new Vuex.Store({
     setOneMovies(state, payload) {
       state.movieDetail = payload;
     },
-    setSearchedMovies(state, payload) {
-      state.movieSearched = payload;
-    },
+    
     setReview(state, payload) {
       state.review = payload;
-    }
+    },
+   
   },
   actions: {
-    getMovies(context) {
+    getNowPlayingMovies(context) {
       axios
         .get(
           "https://api.themoviedb.org/3/movie/now_playing?api_key=00bd566fcd11988eb0fca41abee62e9a&language=en-US&page=1"
@@ -46,7 +45,6 @@ export default new Vuex.Store({
           { crossDomain: "true" }
         )
         .then(movie => {
-          // console.log(`==>get one`, movie.data);
 
           context.commit("setOneMovies", movie.data);
         })
@@ -63,7 +61,7 @@ export default new Vuex.Store({
           }
         )
         .then(movie => {
-          context.commit("setSearchedMovies", movie.data.results);
+          context.commit("setMovies", movie.data.results);
         })
         .catch(err => {
           console.log(err);
@@ -80,6 +78,47 @@ export default new Vuex.Store({
           // console.log('===>R',review.data.results);
 
           context.commit("setReview", review.data.results);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    getPopular(context) {
+      axios
+        .get(
+          `https://api.themoviedb.org/3/movie/popular?api_key=00bd566fcd11988eb0fca41abee62e9a&language=en-US&page=1`,
+          { crossDomain: "true" }
+        )
+        .then(movie => {
+          context.commit("setMovies", movie.data.results);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    getTopRated(context) {
+      axios
+        .get(
+          `https://api.themoviedb.org/3/movie/top_rated?api_key=00bd566fcd11988eb0fca41abee62e9a&language=en-US&page=1`,
+          { crossDomain: "true" }
+        )
+        .then(movie => {
+          // console.log('ggg');
+
+          context.commit("setMovies", movie.data.results);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    getUpcoming(context) {
+      axios
+        .get(
+          `https://api.themoviedb.org/3/movie/upcoming?api_key=00bd566fcd11988eb0fca41abee62e9a&language=en-US&page=1`,
+          { crossDomain: "true" }
+        )
+        .then(movie => {
+          context.commit("setMovies", movie.data.results);
         })
         .catch(err => {
           console.log(err);

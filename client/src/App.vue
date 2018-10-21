@@ -1,9 +1,7 @@
 <template>
   <div id="app">
 
-
   <v-toolbar>
-    <!-- <v-toolbar-title>Title</v-toolbar-title> -->
     <v-toolbar-items class="hidden-sm-and-down">
           <v-btn
           v-for="item in menu"  
@@ -14,12 +12,10 @@
     </v-toolbar-items>
     
     <v-spacer></v-spacer>
-   
-
+  
     <v-form
     v-on:submit.prevent
     >
-  
       <v-text-field
         flat
         label="Search"
@@ -29,8 +25,6 @@
         @keyup.native="search"
       ></v-text-field>
 
-      
- 
     </v-form>
   </v-toolbar>
     <router-view/>
@@ -43,12 +37,9 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      menu: [
-        // { icon: "login", path: "/login", title: "Login" },
-        // { icon: "register", path: "/register", title: "Register" },
+      menu: [ 
         { icon: "home", path: "/", title: "Home" },
-        { icon: "review", path: "/reviews", title: "Review" },
-        { icon: "movie", path: "/movies", title: "Movie" }
+        { icon: "Discover", path: "/discover", title: "Discover" }
       ],
       searchKey: ""
     };
@@ -60,9 +51,6 @@ export default {
       this.searchMovies(this.searchKey)
     }
   },
-  mounted() {
-    // this.search();
-  }
 };
 </script>
 

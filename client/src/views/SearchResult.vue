@@ -1,6 +1,6 @@
 <template>
 <div>
-    <h2>search</h2>
+    <h1 id='search-title'>Search for {{this.$route.params.key}}</h1>
 
  <movieTile></movieTile>
      <router-view></router-view>
@@ -9,7 +9,6 @@
 
 </template>
 <script>
-// import axios from "axios";
 import MovieTile from "../components/MovieTile";
 
 export default {
@@ -46,4 +45,12 @@ export default {
   }
 };
 </script>
+
+<style>
+#search-title{
+    text-align: center;
+margin:2em;
+}
+</style>
+
 

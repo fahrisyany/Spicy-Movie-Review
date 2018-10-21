@@ -1,8 +1,10 @@
 <template>
   <div class="home">
 
-   <h1> Latest Movies</h1>
-   
+<br>
+<h1 id='title-latest'>Now Playing</h1>
+   <br>
+
  <movieTile></movieTile>
      <router-view></router-view>
 
@@ -11,43 +13,39 @@
 </template>
 
 <script>
-import MovieTile from '../components/MovieTile'
-// @ is an alias to /src
-
-// import axios from "axios";
+import MovieTile from "../components/MovieTile";
 
 export default {
-  components:{
+  components: {
     MovieTile
   },
   data() {
-    return {
-    };
-  },
+    return {};
+  }
 };
 </script>
 
 <style>
 .movie {
   margin: 1.2em;
-  border: red 2px solid;
 }
 
 .rightBar {
   float: right;
-  border: red 2px solid;
   width: 400px;
 }
 
 .movies {
-     /* flex-direction: column;  make main axis vertical */
   justify-content: center;
-    /* align-items: center;   */
   display: flex;
-  border: red 2px solid;
-  /* width :1600px; */
   flex-wrap: wrap;
-  /* display: inline-flex; */
+}
+
+#title-latest {
+  /* border:solid red 2px; */
+  margin: 0.8em;
+  text-align: center;
 }
 </style>
+
 
