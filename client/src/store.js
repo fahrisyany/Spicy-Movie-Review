@@ -29,9 +29,7 @@ export default new Vuex.Store({
         )
         .then(movie => {
           context.commit("setMovies", movie.data.results);
-          console.log('llll');
 
-          // this.moviesList = movie.data.results;
         })
         .catch(err => {
           console.log(err);
@@ -56,7 +54,6 @@ export default new Vuex.Store({
           `https://api.themoviedb.org/3/search/movie?query=${key}&api_key=00bd566fcd11988eb0fca41abee62e9a&page=1`
         )
         .then(movie => {
-          console.log(movie.data.results);
           
           context.commit("setSearchedMovies", movie.data.results);
 

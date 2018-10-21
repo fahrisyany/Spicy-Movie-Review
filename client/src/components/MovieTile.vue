@@ -84,10 +84,11 @@ export default {
     }
   },
   created() {
-    this.getMovies();
-    this.searchMovies();
+    //   this.searchMovies();
   },
-  mounted() {},
+  mounted() {
+    this.getMovies();
+  },
   computed: {
     ...mapState({ moviesList: "moviesList", movieSearched: "movieSearched" })
   }
